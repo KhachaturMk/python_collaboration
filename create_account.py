@@ -29,3 +29,16 @@ def check_account_inputs(db):
             db[unique_number()] = [account_details(name,balance)]
 
     print(db)
+
+def top_up_balance(db):
+    print("------------------------------------------------")
+    acc_number = input('Enter your account number: ')
+    balance = input('Enter top up balance: ')
+    key = db.get(acc_number)
+    if key is not None and balance .isdigit() and int(balance) > 0:
+        for values in key:
+            values['balance'] += int(balance)
+            print(f"{balance} GEL was added to the balance")
+            print(db)
+    else:
+        print('incorrect info')
