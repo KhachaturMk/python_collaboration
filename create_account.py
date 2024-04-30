@@ -2,10 +2,10 @@ import random
 
 def unique_number():
     random_number = random.randint(0000, 9999)
+    while len(str(random_number)) != 4:
+        random_number = random.randint(0000, 9999)
     acc_number = 'TB' + str(random_number)
     return acc_number
-
-
 
 def account_details(name, balance):
     try:
