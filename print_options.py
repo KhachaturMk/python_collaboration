@@ -10,3 +10,7 @@ def operation_options():
 
     user_input = input("Enter Your Option: ")
     return user_input
+
+
+def printLines():
+    print("------------------------------------------------")

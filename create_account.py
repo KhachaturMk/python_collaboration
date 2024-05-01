@@ -1,3 +1,4 @@
+from print_options import printLines
 import random
 
 def unique_number():
@@ -12,33 +13,33 @@ def account_details(name, balance):
         if balance.isdigit and int(balance) in range(0, 101):
             return {'name': name, 'balance': int(balance)}
         elif balance.isdigit and int(balance) not in range(0, 101):
-            print("------------------------------------------------")
+            printLines()
             print("The amount you entered is out of range")
     except ValueError:
-        print("------------------------------------------------")
-        print('The amount you enter is not a number')
-
-
+        printLines()
+        print("The amount you enter is not a number")
 
 def check_account_inputs(db):
-    print("------------------------------------------------")
-    name = input('Enter your name: ')
-    balance = input('Enter starting balance (0-100): ')
-
-    if unique_number() not in db.keys() and account_details(name,balance) is not None:
-            db[unique_number()] = [account_details(name,balance)]
-
-    print(db)
+    printLines()
+    name = input("Enter your name: ")
+    balance = input("Enter starting balance (0-100): ")
+    ibanCode = unique_number()
+    if ibanCode not in db.keys() and account_details(name,balance) is not None:
+        db[ibanCode] = [account_details(name,balance)]
+        printLines()
+        print(f"User Added Successfully\n Iban Code: {ibanCode}\n Name: {name}\n Balance: {balance}")
 
 def top_up_balance(db):
-    print("------------------------------------------------")
-    acc_number = input('Enter your account number: ')
-    balance = input('Enter top up balance: ')
+    printLines()
+    acc_number = input("Enter your account number: ")
+    balance = input("Enter top up balance: ")
     key = db.get(acc_number)
     if key is not None and balance .isdigit() and int(balance) > 0:
         for values in key:
             values['balance'] += int(balance)
+            printLines()
             print(f"{balance} GEL was added to the balance")
-            print(db)
+            print(f" Iban Code: {acc_number}\n Name: {values['name']}\n Balance: {values['balance']}")
     else:
-        print('incorrect info')
+        printLines()
+        print("incorrect info")

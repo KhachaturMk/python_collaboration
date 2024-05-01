@@ -1,19 +1,36 @@
-from print_options import operation_options
+from print_options import operation_options, printLines
 from create_account import check_account_inputs, top_up_balance
 from loan import loan_calculator
+from money_Transfer import  checkTransfer
+from user_Information import user_Info
+
 db = {}
+history_db = {}
 
 while True:
     select = operation_options()
     if select == '1':
         check_account_inputs(db)
 
-    if select == '2':
+    elif select == '2':
         top_up_balance(db)
 
-    if select == '6':
+    elif select == '3':
+        checkTransfer(db)
+
+    elif select == '4':
+        user_Info(db)   
+
+    elif select == '5':
+        user_Info(db)   
+
+    elif select == '6':
         loan_calculator(db)
 
-    if select == '0':
+    elif select == '0':
         print('Exit')
         exit()
+
+    else:
+        printLines()
+        print("Invalid input")
