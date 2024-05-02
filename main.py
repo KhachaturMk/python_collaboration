@@ -3,7 +3,7 @@ from create_account import check_account_inputs, top_up_balance
 from loan import loan_calculator
 from money_Transfer import  checkTransfer
 from user_Information import user_Info
-from history import display_history
+from history import history_options
 
 db = {}
 history_db = {}
@@ -23,7 +23,7 @@ while True:
         user_Info(db)   
 
     elif select == '5':
-        display_history(db)   
+        history_options(db)   
 
     elif select == '6':
         loan_calculator(db)
