@@ -21,11 +21,13 @@ def Transfer(db,sender,reciever,money):
     User = db.get(sender)
     for sendervalues in User:
         sendervalues['balance'] = sendervalues['balance'] - money
-
+        sendervalues['history'].append(f"Transfer to {reciever}: -{money}")
+        
     User = db.get(reciever)
     for recievervalues in User:
         recievervalues['balance'] = recievervalues['balance'] + money
-
+        recievervalues['history'].append(f"Transfer from {sender}: +{money}")
+        
     print(f"\n Iban Code: {sender}\n Name: {sendervalues['name']}\n Balance: {sendervalues['balance']}")
     print(f"\n Iban Code: {reciever}\n Name: {recievervalues['name']}\n Balance: {recievervalues['balance']}")
    

@@ -11,7 +11,7 @@ def unique_number():
 def account_details(name, balance):
     try:
         if balance.isdigit and int(balance) in range(0, 101):
-            return {'name': name, 'balance': int(balance)}
+            return {'name': name, 'balance': int(balance), 'history': []}
         elif balance.isdigit and int(balance) not in range(0, 101):
             printLines()
             print("The amount you entered is out of range")
@@ -37,6 +37,7 @@ def top_up_balance(db):
     if key is not None and balance .isdigit() and int(balance) > 0:
         for values in key:
             values['balance'] += int(balance)
+            values['history'].append(f"Deposit: +{balance}")
             printLines()
             print(f"{balance} GEL was added to the balance")
             print(f" Iban Code: {acc_number}\n Name: {values['name']}\n Balance: {values['balance']}")
