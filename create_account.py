@@ -34,6 +34,7 @@ def top_up_balance(db):
     acc_number = input("Enter your account number: ")
     balance = input("Enter top up balance: ")
     key = db.get(acc_number)
+    f = open('transaction.txt', mode='a')
     if key is not None and balance .isdigit() and int(balance) > 0:
         for values in key:
             values['balance'] += int(balance)
@@ -41,6 +42,8 @@ def top_up_balance(db):
             printLines()
             print(f"{balance} GEL was added to the balance")
             print(f" Iban Code: {acc_number}\n Name: {values['name']}\n Balance: {values['balance']}")
+            f.write(f"TopUp: {values['name']}, {acc_number}, {balance} GEL\n")
     else:
         printLines()
         print("incorrect info")
+    f.close()
