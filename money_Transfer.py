@@ -51,8 +51,8 @@ def checkTransfer(db):
                     print(f"{amount} GEL was transferred from {sender_acc_number} to {receiver_acc_number}")
                     print(f"Sender: {sender_values['name']}\n Sender's Balance: {sender_values['balance']}")
                     print(f"Receiver: {receiver_values['name']}\n Receiver's Balance: {receiver_values['balance']}")
-                    f.write(f"{sender_values['name']}, {sender_acc_number}, -{amount} GEL\n")  # Write transaction to file
-                    f.write(f"{receiver_values['name']}, {receiver_acc_number}, +{amount} GEL\n")  # Write transaction to file
+                    f.write(f"Transfer OUT: {sender_values['name']}, {sender_acc_number}, -{amount} GEL\n")  # Write transaction to file
+                    f.write(f"Transfer IN: {receiver_values['name']}, {receiver_acc_number}, +{amount} GEL\n")  # Write transaction to file
             else:
                 printLines()
                 print("Insufficient balance")

@@ -29,7 +29,7 @@ def check_account_inputs(db):
         db[ibanCode] = [account_details(name,balance)]
         printLines()
         print(f"User Added Successfully\n Iban Code: {ibanCode}\n Name: {name}\n Balance: {balance}")
-        f.write(f"{name}, {ibanCode}, {balance} GEL\n")
+        f.write(f"Registration: {name}, {ibanCode}, {balance} GEL\n")
     else:
         printLines()
         print("User already exists or incorrect input")
