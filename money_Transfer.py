@@ -33,35 +33,30 @@ def Transfer(db,sender,reciever,money):
    
 def checkTransfer(db):
     printLines()
-    sender = input("Enter Your ID: ")
-    reciever = input("Enter recievers ID: ")
-    if checkSender(db,sender) == True and checkReciever(db,reciever) == True:
-        while True:
-
-            try:
-                printLines()
-                print(f"Your Current Amount of Money ({checkBalanceMoney(db,sender)})") 
-                moneyAmount = int(input("Enter Amount of money to send: "))                                
-            except ValueError:
-                printLines()
-                print("The amount you enter is not a number")
-
-            if int(checkBalanceMoney(db,sender)) > moneyAmount:
-                Transfer(db,sender,reciever,moneyAmount)
-                
-                break
+    sender_acc_number = input("Enter sender's account number: ")
+    receiver_acc_number = input("Enter receiver's account number: ")
+    amount = input("Enter transfer amount: ")
+    sender_key = db.get(sender_acc_number)
+    receiver_key = db.get(receiver_acc_number)
+    f = open('transaction.txt', mode='a')  # Open file in append mode
+    if sender_key is not None and receiver_key is not None and amount.isdigit() and int(amount) > 0:
+        for sender_values in sender_key:
+            if sender_values['balance'] >= int(amount):
+                for receiver_values in receiver_key:
+                    sender_values['balance'] -= int(amount)
+                    receiver_values['balance'] += int(amount)
+                    sender_values['history'].append(f"Transfer to {receiver_values['name']}: -{amount}")
+                    receiver_values['history'].append(f"Transfer from {sender_values['name']}: +{amount}")
+                    printLines()
+                    print(f"{amount} GEL was transferred from {sender_acc_number} to {receiver_acc_number}")
+                    print(f"Sender: {sender_values['name']}\n Sender's Balance: {sender_values['balance']}")
+                    print(f"Receiver: {receiver_values['name']}\n Receiver's Balance: {receiver_values['balance']}")
+                    f.write(f"{sender_values['name']}, {sender_acc_number}, -{amount} GEL\n")  # Write transaction to file
+                    f.write(f"{receiver_values['name']}, {receiver_acc_number}, +{amount} GEL\n")  # Write transaction to file
             else:
                 printLines()
-                print("Not enought funds")
-
-    elif checkSender(db,sender) == False and checkReciever(db,reciever) == True:
-        printLines()
-        print("Sender user doesn't exists")
-
-    elif checkSender(db,sender) == True and checkReciever(db,reciever) == False:
-        printLines()
-        print("Recievers user doesn't exists")
-    
+                print("Insufficient balance")
     else:
         printLines()
-        print("Sender user and Reciever user doesn't exist")
+        print("Incorrect account numbers or amount")
+    f.close() 

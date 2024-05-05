@@ -24,10 +24,16 @@ def check_account_inputs(db):
     name = input("Enter your name: ")
     balance = input("Enter starting balance (0-100): ")
     ibanCode = unique_number()
+    f = open('transaction.txt', mode='a')
     if ibanCode not in db.keys() and account_details(name,balance) is not None:
         db[ibanCode] = [account_details(name,balance)]
         printLines()
         print(f"User Added Successfully\n Iban Code: {ibanCode}\n Name: {name}\n Balance: {balance}")
+        f.write(f"{name}, {ibanCode}, {balance} GEL\n")
+    else:
+        printLines()
+        print("User already exists or incorrect input")
+    f.close()
 
 def top_up_balance(db):
     printLines()
