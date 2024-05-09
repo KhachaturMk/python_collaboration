@@ -1,6 +1,7 @@
 from print_options import printLines
 import random
 import pandas as pd
+import uuid
 
 def unique_number():
     random_number = random.randint(0000, 9999)
@@ -28,10 +29,11 @@ def check_account_inputs(db):
     f = open('transaction.txt', mode='a')
     if ibanCode not in db.keys() and account_details(name,balance) is not None:
         db[ibanCode] = [account_details(name,balance)]
+        user_id = uuid.uuid4()
         printLines()
         print(f"User Added Successfully\n Iban Code: {ibanCode}\n Name: {name}\n Balance: {balance}")
         f.write(f"Registration: {name}, {ibanCode}, {balance} GEL\n")
-        df = pd.DataFrame([[name, ibanCode, balance]])
+        df = pd.DataFrame([[user_id, name, ibanCode, balance]])
         df.to_csv('users.csv', header=False, mode='a', index=False)
     else:
         printLines()
