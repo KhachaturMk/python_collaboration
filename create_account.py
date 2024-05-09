@@ -1,5 +1,6 @@
 from print_options import printLines
 import random
+import pandas as pd
 
 def unique_number():
     random_number = random.randint(0000, 9999)
@@ -30,6 +31,8 @@ def check_account_inputs(db):
         printLines()
         print(f"User Added Successfully\n Iban Code: {ibanCode}\n Name: {name}\n Balance: {balance}")
         f.write(f"Registration: {name}, {ibanCode}, {balance} GEL\n")
+        df = pd.DataFrame([[name, ibanCode, balance]])
+        df.to_csv('users.csv', header=False, mode='a', index=False)
     else:
         printLines()
         print("User already exists or incorrect input")
