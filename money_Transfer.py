@@ -50,10 +50,10 @@ def checkTransfer(db):
                     sender_values['history'].append(f"Transfer to {receiver_values['name']}: -{amount}")
                     receiver_values['history'].append(f"Transfer from {sender_values['name']}: +{amount}")
                     
-                    with open('transactions.csv', mode='a', newline='', encoding='utf-8') as csvfile:
-                        now = datetime.datetime.now()
-                        csvfile.write(f"Sender: {sender_values['name']},{sender_acc_number}, Receiver: {receiver_values['name']},{receiver_acc_number},{amount},{now.strftime('%Y-%m-%d %H:%M:%S')}\n")
-                        
+                    csvfile = open('transactions.csv', mode='a', newline='', encoding='utf-8')
+                    now = datetime.datetime.now()
+                    csvfile.write(f"Sender: {sender_values['name']},{sender_acc_number}, Receiver: {receiver_values['name']},{receiver_acc_number},{amount},{now.strftime('%Y-%m-%d %H:%M:%S')}\n")
+                    
                     printLines()
                     print(f"{amount} GEL was transferred from {sender_acc_number} to {receiver_acc_number}")
                     print(f"Sender: {sender_values['name']}\n Sender's Balance: {sender_values['balance']}")
@@ -63,6 +63,7 @@ def checkTransfer(db):
             else:
                 printLines()
                 print("Insufficient balance")
+            csvfile.close()
     else:
         printLines()
         print("Incorrect account numbers or amount")
