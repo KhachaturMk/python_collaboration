@@ -1,16 +1,15 @@
 def operation_options():
-    print("------------------------------------------------")
-    print("1. Create Account")
-    print("2. Balance")
-    print("3. Money Transfer")
-    print("4. Details")
-    print("5. History")
-    print("6. Loan Calculation\n")
+    printLines()
+    print("1. create account")
+    print("2. top up balance")
+    print("3. transfer money")
+    print("4. account details")
+    print("5. transaction history")
+    print("6. loan calculator\n")
     print("0. Exit\n")
 
     user_input = input("Enter Your Option: ")
     return user_input
 
-
 def printLines():
-    print("------------------------------------------------")
+    print("-" * 150)
